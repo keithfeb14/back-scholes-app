@@ -2,14 +2,6 @@
 import numpy as np
 from scipy.stats import norm
 
-'''
-#define variables 
-r = 0.01 #interest rate (1%) 
-S = 30 #underlying ($30)
-K = 40 #strike ($40)
-T = 240/365 #240 days out 365
-sigma = 0.30 #volatility (30%)
-'''
 
 def blackScholes(r, S, K, T, sigma, type="c"):
     "Calculate BS optioin price for a call/put"
@@ -27,14 +19,8 @@ def blackScholes(r, S, K, T, sigma, type="c"):
 #print("Option price is: ", blackScholes(r, S, K, T, sigma, type="C"))
 
 
-'''
-
-Delta measures the rate of change of the theoretical option value with respect to changes in the underlying asset's price.
-
-'''
 
 def delta_calc(r, S, K, T, sigma, type="c"):
-    "Calculate delta of an option"
     d1 = (np.log(S/K) + (r + sigma**2/2)*T)/(sigma*np.sqrt(T))
     try:
         if type == "c":
@@ -49,13 +35,9 @@ def delta_calc(r, S, K, T, sigma, type="c"):
         
 	
 
-'''
-Gamma measures the rate of change in the delta with respect to changes in the underlying price.
 
-'''
 
 def gamma_calc(r, S, K, T, sigma, type="c"):
-    "Calculate gamma of a option"
     d1 = (np.log(S/K) + (r + sigma**2/2)*T)/(sigma*np.sqrt(T))
     d2 = d1 - sigma*np.sqrt(T)
     try:
@@ -67,14 +49,9 @@ def gamma_calc(r, S, K, T, sigma, type="c"):
 
 
 
-'''
-Vega measures sensitivity to volatility. Vega is the derivative of the option value with respect 
-to the volatility of the underlying asset.
 
-'''
 
 def vega_calc(r, S, K, T, sigma, type="c"):
-    "Calculate BS price of call/put"
     d1 = (np.log(S/K) + (r + sigma**2/2)*T)/(sigma*np.sqrt(T))
     d2 = d1 - sigma*np.sqrt(T)
     try:
@@ -85,13 +62,9 @@ def vega_calc(r, S, K, T, sigma, type="c"):
         
 
         
-'''
-Theta measures the sensitivity of the value of the derivative to the passage of time - time decay.
 
-'''
 
 def theta_calc(r, S, K, T, sigma, type="c"):
-    "Calculate BS price of call/put"
     d1 = (np.log(S/K) + (r + sigma**2/2)*T)/(sigma*np.sqrt(T))
     d2 = d1 - sigma*np.sqrt(T)
     try:
@@ -104,15 +77,9 @@ def theta_calc(r, S, K, T, sigma, type="c"):
         print("Please confirm option type, either 'c' for Call or 'p' for Put!")
         
 
-        
 
-'''
-Rho measures the sensitivity to the interest rate.
-
-'''
 
 def rho_calc(r, S, K, T, sigma, type="c"):
-    "Calculate BS price of call/put"
     d1 = (np.log(S/K) + (r + sigma**2/2)*T)/(sigma*np.sqrt(T))
     d2 = d1 - sigma*np.sqrt(T)
     try:
@@ -129,7 +96,6 @@ def rho_calc(r, S, K, T, sigma, type="c"):
 def probability_exceedance(r, S, K, T, sigma, type="c"):
     """
     Calculate the probability of exceedance, i.e., the option expiring in the money.
-    This is a simplified approach that doesn't account for changes in volatility or interest rates.
     """
     d1 = (np.log(S / K) + (r + sigma ** 2 / 2) * T) / (sigma * np.sqrt(T))
     d2 = d1 - sigma * np.sqrt(T)
